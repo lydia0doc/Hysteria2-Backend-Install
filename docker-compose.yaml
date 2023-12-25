@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+  hysteria:
+    image: ghcr.io/cedar2025/hysteria:v1.0.5
+    container_name: hysteria
+    restart: always
+    network_mode: "host"
+    volumes:
+      - acme:/acme
+      - ./hysteria.yaml:/etc/hysteria.yaml
+      - ./tls/cert.crt:/etc/hysteria/tls.crt
+      - ./tls/private.key:/etc/hysteria/tls.key
+    command: ["server", "-c", "/etc/hysteria.yaml"]
+volumes:
+  acme:
